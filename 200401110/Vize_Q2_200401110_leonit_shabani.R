@@ -21,13 +21,11 @@ spotify_search_artist <- function(artist_name){
     query = list(q = artist_name, type = "artist")
   )
   content <- content(response)
-  search_result <- data.frame(
-    artist = sapply(content$artists$items, function(artist_info){
-      artist_info$name
-    }),
-    id = sapply(content$artists$items, function(artist_info){
-      artist_info$id
-    })
-  )
-  return(list(status_code=response$status_code, search_results=search_result))
+
+  search_result <- lapply(content$artists$item, function(artist_info){
+    data.frame(artist = artist_info$name, id=artist_info$id)
+  })
+  finalResult <- do.call(rbind, search_result)
+  
+  return(list(status_code=response$status_code, search_results=finalResult))
 }

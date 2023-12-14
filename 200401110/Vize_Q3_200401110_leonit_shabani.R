@@ -2,12 +2,12 @@ source("Vize_Q2_200401110_leonit_shabani.R")
 
 artists_names <- c("Imagine Dragons", "One Direction", "Elvana Gjata", "Dafina Zeqiri", "Taylor Swift")
 
-my_artists <- data.frame(
-  artist = sapply(artists_names, function(artist_info){
-    spotify_search_artist(artist_info)$search_results[[1]][[1]]
-  }),
-  id = sapply(artists_names, function(artist_info){
-    spotify_search_artist(artist_info)$search_results[[2]][[1]]
-  })
-)
-rownames(my_artists) <- NULL
+spotify_search_artist_list <- lapply(artists_names, spotify_search_artist)
+
+my_artists_dataframe_list <- lapply(spotify_search_artist_list, function(x) x[[2]])
+
+my_artists_final_list <- lapply(my_artists_dataframe_list, function(x){
+  data.frame(artist=x[[1]][[1]], id =x[[2]][[1]])
+})
+
+my_artists <- do.call(rbind, my_artists_final_list)
