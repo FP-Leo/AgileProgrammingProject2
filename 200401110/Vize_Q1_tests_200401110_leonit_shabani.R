@@ -4,8 +4,6 @@ rm(list = ls())
 
 source("Vize_Q1_200401110_leonit_shabani.R")
 
-result <- spotify_token()
-
 # Q 1-1
 test_that("Global Workspace’de spotify_token adlı bir değişken olmalı.", {
   expect_true(exists("spotify_token"))
@@ -15,6 +13,8 @@ test_that("Global Workspace’de spotify_token adlı bir değişken olmalı.", {
 test_that("spotify_token adlı değişkenin tipi “function” olmalı.", {
   expect_true(is.function(spotify_token))
 })
+
+result <- spotify_token()
 
 # Q 1-3
 test_that("spotify_token() çağrıldığında döndürdüğü çıktı bir liste olmalı", {

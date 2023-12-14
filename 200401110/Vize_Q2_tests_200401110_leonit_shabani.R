@@ -2,8 +2,6 @@ library(testthat)
 rm(list = ls())
 source("Vize_Q2_200401110_leonit_shabani.R")
 
-result <- spotify_search_artist("Imagine Dragons")
-
 # Q 2-1
 test_that("Global Workspace’de spotify_search_artist adlı bir değişken olmalı.", {
   expect_true(exists("spotify_search_artist"))
@@ -13,6 +11,8 @@ test_that("Global Workspace’de spotify_search_artist adlı bir değişken olma
 test_that("spotify_search_artist adlı değişkenin tipi “function” olmalı.", {
   expect_true(is.function(spotify_search_artist))
 })
+
+result <- spotify_search_artist("Imagine Dragons")
 
 # Q 2-3
 test_that("spotify_search_artist() herhangi bir artist ismi ile çağrıldığında döndürdüğü çıktı bir liste olmalı.", {
